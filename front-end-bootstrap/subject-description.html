@@ -47,6 +47,15 @@
   <link href="css/notepad.css" rel="stylesheet" />
   <!-- Custom styles for this page -->
   <link href="vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+  <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <meta name="google-signin-client_id"
+      content="251105086649-7dp43c1tupf0tsmqdoahj1jcbud3spmq.apps.googleusercontent.com">
+  <script type="text/javascript" src="login.js"></script>
+  <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
+
 </head>
 
 <body id="page-top">
@@ -253,67 +262,8 @@
                   </div>
                 </div>
 
-                <div class="card-body" id="bb"></div>
                 <div class="card-body" id="description-course"></div>
 
-                <div class="modal fade" id="reviewModal2" tabindex="-1" role="dialog"
-                  aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">
-                          지난 과목 등록하기
-                        </h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      <form id="add_review">
-                        <div class="modal-body" id="past_grade">
-                          <label>자신의 정보에 해당하는 해당 학기, 교수, 학점을
-                            적어주세요. <br /><b>2020년 2학기 현 학기는 학점이 적용되지
-                              않습니다.</b><br /><br />Term</label>
-                          <select class="custom-select" name="past_term_rad2" id="past_term_rad2">
-                            <option value="2018-2">2018-2</option>
-                            <option value="2019-1">2019-1</option>
-                            <option value="2019-2">2019-2</option>
-                            <option value="2020-1">2020-1</option>
-                            <option value="2020-2">2020-2</option>
-                          </select>
-                          <br /><br />
-                          <label>Prof</label>
-                          <select class="custom-select" name="past_prof_rad2" id="past_prof_rad2"></select>
-                          <br /><br />
-                          <label>grade</label>
-                          <select class="custom-select" name="past_grade_rad2" id="past_grade_rad2">
-                            <option value="A+">A+</option>
-                            <option value="A0">A0</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B0">B0</option>
-                            <option value="B-">B-</option>
-                            <option value="C+">C+</option>
-                            <option value="C0">C0</option>
-                            <option value="C-">C-</option>
-                            <option value="D+">D+</option>
-                            <option value="D0">D0</option>
-                            <option value="D-">D-</option>
-                            <option value="F">F</option>
-                          </select>
-                          <br />
-                        </div>
-                      </form>
-                      <div class="modal-footer">
-                        <button class="btn btn-primary" type="button" onclick="add_grade()" data-dismiss="modal">
-                          추가하기
-                        </button>
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">
-                          Cancel
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
                 <div class="row card-body">
                   <div class="card-3-3-3 col-md-6 mb-4">
                     <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
@@ -343,52 +293,27 @@
                   </div>
                 </div>
 
+                
                 <div class="card-body" id="faculty">
-                  <div id="faculty-title"></div>
-
-                  <!-- DataTales Example 테이블 형식 -->
-
-                  <h6 class="m-0 font-weight-bold text-primary">
-                    지난 교수진
-                  </h6>
+                  <label><b>지난 교수진</b></label>
                   <div class="table-responsive">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered"  width="100%" cellspacing="0">
                       <thead>
                         <tr>
                           <th>학기</th>
                           <th>교수명</th>
                         </tr>
                       </thead>
-
                       <tbody id="faculty-table">
-                        <tr>
-                          <td>Tiger Nixon</td>
-                          <td>System Architect</td>
-                        </tr>
-                        <tr>
-                          <td>Garrett Winters</td>
-                          <td>Accountant</td>
-                        </tr>
-                        <tr>
-                          <td>Ashton Cox</td>
-                          <td>Junior Technical Author</td>
-                        </tr>
-                        <tr>
-                          <td>Cedric Kelly</td>
-                          <td>Senior Javascript Developer</td>
-                        </tr>
-                        <tr>
-                          <td>Airi Satou</td>
-                          <td>Accountant</td>
-                        </tr>
                       </tbody>
                     </table>
-
                   </div>
 
                 </div>
-                <hr />
-                <div id="tell-prefessor">
+                
+                <hr/>
+                <div class="card-body"id="tell-prefessor">
+                    <label id = "faculty-title"></label><br>
                   <textarea id="send_text" class="text-area-professor" rows="1" cols="auto"
                     placeholder="교수님에게 메세지를 보내보세요!"></textarea>
                   <a href="#" onclick="set_text()" class="fas fa-paper-plane fa-2x text-gray-600"
@@ -431,6 +356,7 @@
               </div>
             </div>
           </div>
+
         </div>
         <!-- End of Main Content -->
 
@@ -638,6 +564,68 @@
           </div>
         </div>
       </div>
+      <div class="text-center">
+        <div class="g-signin2 btn" data-onsuccess="onSignIn"></div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="reviewModal2" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">
+            지난 과목 등록하기
+          </h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <form id="add_review">
+          <div class="modal-body" id="past_grade">
+            <label>자신의 정보에 해당하는 해당 학기, 교수, 학점을
+              적어주세요. <br /><b>2020년 2학기 현 학기는 학점이 적용되지
+                않습니다.</b><br /><br />Term</label>
+            <select class="custom-select" name="past_term_rad2" id="past_term_rad2">
+              <option value="2018-2">2018-2</option>
+              <option value="2019-1">2019-1</option>
+              <option value="2019-2">2019-2</option>
+              <option value="2020-1">2020-1</option>
+              <option value="2020-2">2020-2</option>
+            </select>
+            <br /><br />
+            <label>Prof</label>
+            <select class="custom-select" name="past_prof_rad2" id="past_prof_rad2"></select>
+            <br /><br />
+            <label>grade</label>
+            <select class="custom-select" name="past_grade_rad2" id="past_grade_rad2">
+              <option value="A+">A+</option>
+              <option value="A0">A0</option>
+              <option value="A-">A-</option>
+              <option value="B+">B+</option>
+              <option value="B0">B0</option>
+              <option value="B-">B-</option>
+              <option value="C+">C+</option>
+              <option value="C0">C0</option>
+              <option value="C-">C-</option>
+              <option value="D+">D+</option>
+              <option value="D0">D0</option>
+              <option value="D-">D-</option>
+              <option value="F">F</option>
+            </select>
+            <br />
+          </div>
+        </form>
+        <div class="modal-footer">
+          <button class="btn btn-primary" type="button" onclick="add_grade()" data-dismiss="modal">
+            추가하기
+          </button>
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
     </div>
 
     <script>
@@ -682,7 +670,7 @@
       // 검색창으로부터 얻어온 과목명
       // Database의 Course에서 입력받은 과목명에 해당하는 collection을 얻어온다.
       findCourseValue = sessionStorage.getItem("course_name");
-      findCourseValue = "JAVA프로그래밍및실습";
+ //     findCourseValue = "JAVA프로그래밍및실습";
       console.log(findCourseValue);
 
       var col = database
@@ -700,6 +688,7 @@
           if (sc == "") {
             sc = "등록되지 않았습니다.";
           }
+          list_div2_4.innerHTML = "<b>\""+doc.data().name+"\" 교수님들에게 하고 싶은 말을 적어주세요!</b>";
           basic = doc.data().name + " (" + doc.data().num + ")";
           past_credit = doc.data().credit;
           past_maj = doc.data().div;
@@ -723,15 +712,22 @@
             "</div><br><br>";
 
           realted = "<br><b>연관과목</b>";
-          related_subject_pre = doc.data().prepro.pre;
-          if (related_subject_pre == null) {
+          var related_subject_pre="", related_subject_post="";
+          if (doc.data().prepro.pre == null) {
             related_subject_pre = "없음";
+          }else{
+            for (var i in doc.data().prepro.pre){
+                related_subject_pre += doc.data().prepro.pre[i]+"<br>";
+            }
           }
           related_subject_cur = doc.data().name;
 
-          related_subject_post = doc.data().prepro.pro;
-          if (related_subject_post == null) {
+          if (doc.data().prepro.pro == null) {
             related_subject_post = "없음";
+          }else{
+            for (var i in doc.data().prepro.pro){
+                related_subject_pre += doc.data().prepro.pro[i]+"<br>";
+            }
           }
           prof =
             "";
@@ -771,7 +767,7 @@
           llll.innerHTML += str2;
           list_div.innerHTML = basic;
           list_div2_1.innerHTML =
-            course_desc + "<br><br><br><br><hr>" + realted;
+            course_desc + "<br><br><br><br>" + realted;
           list_div2_2.innerHTML = related_subject_pre;
           list_div2_2_1.innerHTML = related_subject_cur;
           list_div2_3.innerHTML = related_subject_post;
@@ -890,7 +886,7 @@
             llll.innerHTML += str2;
             list_div.innerHTML = basic;
             list_div2_1.innerHTML =
-              course_desc + "<br><br><br><br><hr>" + realted;
+              course_desc + "<br><br><br><br>" + realted;
             list_div2_2.innerHTML = related_subject_pre;
             list_div2_2_1.innerHTML = related_subject_cur;
             list_div2_3.innerHTML = related_subject_post;
